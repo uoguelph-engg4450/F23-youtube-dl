@@ -1031,6 +1031,7 @@ class TestYoutubeDL(unittest.TestCase):
         self.assertTrue(isinstance(out_info['release_date'], compat_str))
         self.assertEqual(out_info['release_date'], '20210930')
 
+
 class TestYoutubeDLCookies(unittest.TestCase):
 
     @staticmethod
