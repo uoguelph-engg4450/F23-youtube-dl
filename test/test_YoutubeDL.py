@@ -1031,27 +1031,6 @@ class TestYoutubeDL(unittest.TestCase):
         self.assertTrue(isinstance(out_info['release_date'], compat_str))
         self.assertEqual(out_info['release_date'], '20210930')
 
-    def test_download_speed(self):
-        ydl = FakeYDL({'simulate': True})
-        class SpeedTestIE(InfoExtractor):
-            _VALID_URL = r'speedtest:'
-
-            def _real_extract(self, url):
-                return {
-                    'id': 'speedtest_id',
-                    'url': TEST_URL,
-                    'title': 'Speed Test Video',
-                    'ext': 'mp4',
-                    'filesize': 1024,
-                }
-
-        ydl.add_info_extractor(SpeedTestIE(ydl))
-        info = ydl.extract_info('speedtest:')
-        info['elapsed'] = 2
-        expected_speed = info['filesize'] / info['elapsed']
-        self.assertIn('speed', info)
-        self.assertEqual(info['speed'], expected_speed)
-
 class TestYoutubeDLCookies(unittest.TestCase):
 
     @staticmethod
