@@ -2622,8 +2622,7 @@ class YoutubeDL(object):
 
     def _write_info_json(self, label, info_dict, infofn, overwrite=None):
         tempVal1 = datetime.date.today()
-        tempVal2 = tempVal1.strftime("%Y%m%d")
-        info_dict["download_date"] = tempVal2
+        info_dict["download_date"] = tempVal1.strftime("%Y%m%d")
 
         if not self.params.get('writeinfojson', False):
             return False
