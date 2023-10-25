@@ -2032,8 +2032,7 @@ class YoutubeDL(object):
                                                 (sub_lang, error_to_compat_str(err)))
                             continue
 
-        self._write_info_json(
-            'video description', info_dict,
+        self._write_info_json('video description', info_dict,
             replace_extension(filename, 'info.json', info_dict.get('ext')))
 
         self._write_thumbnails(info_dict, filename)
@@ -2622,6 +2621,9 @@ class YoutubeDL(object):
         return encoding
 
     def _write_info_json(self, label, info_dict, infofn, overwrite=None):
+        tempVal1 = datetime.date.today()
+        info_dict["download_date"] = tempVal1.strftime("%Y%m%d")
+
         if not self.params.get('writeinfojson', False):
             return False
 
