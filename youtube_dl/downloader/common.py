@@ -267,6 +267,12 @@ class FileDownloader(object):
                 if s.get('elapsed') is not None:
                     s['_elapsed_str'] = self.format_seconds(s['elapsed'])
                     msg_template += ' in %(_elapsed_str)s'
+                if s.get('speed') is None:
+                    if s.get('elapsed') and s.get('total_bytes') is not None:
+                        s['speed'] = self.calc_speed(0, s['elapsed'], s['total_bytes'])
+                if s.get('speed') is not None:
+                    s['_speed_str'] = self.format_speed(s['speed'])
+                    msg_template += ' at%(_speed_str)s'
                 self._report_progress_status(
                     msg_template % s, is_last_line=True)
 
