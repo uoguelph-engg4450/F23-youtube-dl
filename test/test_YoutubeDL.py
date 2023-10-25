@@ -3,6 +3,9 @@
 
 from __future__ import unicode_literals
 
+# date
+import datetime
+
 # Allow direct execution
 import os
 import sys
@@ -759,6 +762,7 @@ class TestYoutubeDL(unittest.TestCase):
             'playlist_id': '42',
             'uploader': "變態妍字幕版 太妍 тест",
             'creator': "тест ' 123 ' тест--",
+            'download_date': datetime.date.today().strftime("%Y%m%d") # DOWNLOAD DATE ADDED HERE
         }
         second = {
             'id': '2',
@@ -770,6 +774,8 @@ class TestYoutubeDL(unittest.TestCase):
             'filesize': 5 * 1024,
             'playlist_id': '43',
             'uploader': "тест 123",
+            'download_date': datetime.date.today().strftime("%Y%m%d") # DOWNLOAD DATE ADDED HERE
+
         }
         videos = [first, second]
 
@@ -790,9 +796,24 @@ class TestYoutubeDL(unittest.TestCase):
         res = get_videos(f)
         self.assertEqual(res, ['1'])
 
+        #TEST FOR VID #1 & 2
+        ###################################
+
+        f = match_filter_func(f'download_date = {datetime.date.today().strftime("%Y%m%d")}')
+        res = get_videos(f)
+        self.assertEqual(res, ['1'])
+
+
+        f = match_filter_func(f'download_date = {datetime.date.today().strftime("%Y%m%d")}')
+        res = get_videos(f)
+        self.assertEqual(res, ['2'])
+
+        ###################################
+
         f = match_filter_func('duration < 30')
         res = get_videos(f)
         self.assertEqual(res, ['2'])
+
 
         f = match_filter_func('description = foo')
         res = get_videos(f)
