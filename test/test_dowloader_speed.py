@@ -11,6 +11,7 @@ import unittest
 from youtube_dl import downloader
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+
 from test.helper import (
     assertGreaterEqual,
     expect_warnings,
