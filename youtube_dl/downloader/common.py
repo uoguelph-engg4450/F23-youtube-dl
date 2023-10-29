@@ -3,11 +3,8 @@ from __future__ import division, unicode_literals
 import os
 import re
 import sys
-
 import time
 import random
-
-
 
 from ..compat import compat_os_name
 from ..utils import (
