@@ -178,8 +178,8 @@ def generator(test_case, tname):
 
 			tc_filename = get_tc_filename(tc)
 
-		    if test_id:
-			    tc['info_dict']['id'] = test_id
+			if test_id:
+				tc['info_dict']['id'] = test_id
 
 			if not test_case.get('params', {}).get('skip_download', False):
 				self.assertTrue(os.path.exists(tc_filename), msg='Missing file ' + tc_filename)
@@ -194,8 +194,8 @@ def generator(test_case, tname):
 				# Add more test case data as needed
 			}
 
-		    additional_tc_filename = get_tc_filename(additional_tc)
-		    self.assertTrue(os.path.exists(additional_tc_filename), msg='Missing file ' + additional_tc_filename)
+			additional_tc_filename = get_tc_filename(additional_tc)
+			self.assertTrue(os.path.exists(additional_tc_filename), msg='Missing file ' + additional_tc_filename)
                 if not test_case.get('params', {}).get('skip_download', False):
                     self.assertTrue(os.path.exists(tc_filename), msg='Missing file ' + tc_filename)
                     self.assertTrue(tc_filename in finished_hook_called)
