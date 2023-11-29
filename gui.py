@@ -33,6 +33,8 @@ def download_link(index, link, output_path, output_name, num_links):
 
 
 def is_valid_url(url):
+    if not isinstance(url, str):
+        return False
     # Simple URL validation
     regex = re.compile(
         r"^(?:http|ftp)s?://",
