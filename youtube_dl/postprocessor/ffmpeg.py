@@ -259,16 +259,28 @@ class FFmpegExtractAudioPP(FFmpegPostProcessor):
         self._preferredquality = preferredquality
         self._nopostoverwrites = nopostoverwrites
 
+
     def run_ffmpeg(self, path, out_path, codec, more_opts):
+        # Check if a specific audio codec is provided
         if codec is None:
-            acodec_opts = []
+            acodec_opts = []  # If no codec specified, use an empty list for audio codec options
         else:
-            acodec_opts = ['-acodec', codec]
+            acodec_opts = ['-acodec', codec]  # If a codec is specified, prepare audio codec options
+
+        # Combine general options with audio codec options and any additional options
         opts = ['-an'] + acodec_opts + more_opts
+        
         try:
+            # Call the parent class method with the constructed options
             FFmpegPostProcessor.run_ffmpeg(self, path, out_path, opts)
         except FFmpegPostProcessorError as err:
+            # If an error occurs during the FFmpeg operation, catch it and raise an AudioConversionError with the error message
             raise AudioConversionError(err.msg)
+
+    # Note: The following function is designed to normalize the audio of videos in a playlist.
+    # The '-an' option is used for audio normalization in FFmpeg, and additional audio codec options can be specified.
+    # If a specific audio codec is not provided, the function defaults to using an empty list for audio codec options.
+
 
     def run(self, information):
         path = information['filepath']
