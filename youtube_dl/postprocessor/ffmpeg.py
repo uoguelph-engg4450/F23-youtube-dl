@@ -259,17 +259,6 @@ class FFmpegExtractAudioPP(FFmpegPostProcessor):
         self._preferredquality = preferredquality
         self._nopostoverwrites = nopostoverwrites
 
-    def run_ffmpeg(self, path, out_path, codec, more_opts):
-        if codec is None:
-            acodec_opts = []
-        else:
-            acodec_opts = ['-acodec', codec]
-        opts = ['-vn'] + acodec_opts + more_opts
-        try:
-            FFmpegPostProcessor.run_ffmpeg(self, path, out_path, opts)
-        except FFmpegPostProcessorError as err:
-            raise AudioConversionError(err.msg)
-
     def run(self, information):
         path = information['filepath']
 
