@@ -236,7 +236,10 @@ class FileDownloader(object):
 
     def report_destination(self, filename):
         """Report destination filename."""
-        self.to_screen('[download] Destination: ' + filename)
+        self.to_screen('[download] Filename: ' + filename)
+        #print file path of downloaded file
+        self.to_screen('[download] Destination Path: ' + os.path.abspath(filename))
+
 
     def _report_progress_status(self, msg, is_last_line=False):
         fullmsg = '[download] ' + msg
